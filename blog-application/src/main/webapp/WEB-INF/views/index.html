@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>ListBlog</title>
+</head>
+<body>
+<h3>Blogs</h3>
+<p>
+    <a th:href="@{/blogs/create}">
+        Add new blog
+    </a>
+</p>
+
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+
+<table id = "customers">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Author</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${blogs}">
+        <td th:text="${row.title}"></td>
+        <td th:text="${row.content}"></td>
+        <td th:text="${row.author}"></td>
+        <td><a th:href="@{/blogs/{id}/edit(id=${row.getId()})}">edit</a></td>
+        <td><a th:href="@{/blogs/{id}/delete(id=${row.getId()})}">delete</a></td>
+        <td><a th:href="@{/blogs/{id}/view(id=${row.getId()})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
